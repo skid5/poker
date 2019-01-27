@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 
-//number of animation loops should n+2
+//number of animation loops should n+1
 //where n is number of animation files
 //+1 because loop variable needs to start at 1
 #define NUMBER_OF_ANIMATIONS 4
@@ -48,6 +48,35 @@ void shuffle_animation(void) {
     fclose(fp);
 }
 
+void deal_animation(void) {
+    int i;
+    for(i=0; i < 5; i++) {
+        printf("+----+\t");
+    }
+    printf("\n");
+    for(i=0; i < 5; i++) {
+        printf("|    |\t");
+    }
+    printf("\n");
+    for(i=0; i < 5; i++) {
+        printf("|    |\t");
+    }
+    printf("\n");
+    for(i=0; i < 5; i++) {
+        printf("|    |\t");
+    }
+    printf("\n");
+    for(i=0; i < 5; i++) {
+        printf("|    |\t");
+    }
+    printf("\n");
+    for(i=0; i < 5; i++) {
+        printf("+----+\t");
+    }
+    printf("\n");
+    sleep(1);
+}
+
 cards* deal_card(void) {
     //create array of pointers to card struct
     char * color_array[] = {COLOR1, COLOR2, COLOR3, COLOR4};
@@ -73,11 +102,8 @@ int card_check(cards *card_array[], cards *new_card, int hand_size) {
     return 1;
 }
 
-void print_cards(cards * card_array[]) {
+void show_cards(cards * card_array[]) {
     int i;
-    for(i=0; i < HAND_SIZE; i++) {
-        printf("Card color: %s Card rank: %d\n\n", card_array[i]->color, card_array[i]->rank);
-    }
     for(i=0; i < HAND_SIZE; i++) {
         printf("+----+\t");
     }   
@@ -119,8 +145,12 @@ int main(void) {
     srand((unsigned) time(&t));
 
     shuffle_animation();
+    /*array of pointers to the cards struct
+    each card gets random rank and color and 
+    dupplicates are also checked for */
     cards* hand[HAND_SIZE];
     cards* new_card;
+    deal_animation();
 
     int i;
     for(i=0; i < HAND_SIZE;) {
@@ -130,7 +160,7 @@ int main(void) {
             i++;
         }
     }
-    print_cards(hand);
+    show_cards(hand);
 
 
 }
